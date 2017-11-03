@@ -38,31 +38,32 @@ def forward_backward_prop(data, labels, params, dimensions):
     ### YOUR CODE HERE: forward propagation
 
 
-    a1 = data.dot(W1) + b1
-    z1 = sigmoid(a1)
-    a2 = z1.dot(W2) + b2
+    z1 = data.dot(W1) + b1
+    a1 = sigmoid(z1)
 
-    y_hat = softmax(a2)
+    z2 = a1.dot(W2) + b2
+
+    y_hat = softmax(z2)
     cost = -np.sum(labels * np.log(y_hat))
 
     ### END YOUR CODE
 
     ### YOUR CODE HERE: backward propagation
 
-    dy = y_hat - labels
+    score = y_hat - labels
 
-    gradb2 = np.sum(dy, axis=0)
-    gradW2 = z1.T.dot(dy) # M by H
+    grad_b2 = np.sum(score, axis=0)
+    grad_W2 = a1.T.dot(score) # M by H
 
-    dz1 = sigmoid_grad(z1)*(dy.dot(W2.T))
-    gradb1 = np.sum(dz1, axis=0)
-    gradW1 = data.T.dot(dz1)
+    d_a1 = sigmoid_grad(a1) * (score.dot(W2.T))
+    grad_b1 = np.sum(d_a1, axis=0)
+    grad_W1 = data.T.dot(d_a1)
 
     ### END YOUR CODE
 
     ### Stack gradients (do not modify)
-    grad = np.concatenate((gradW1.flatten(), gradb1.flatten(),
-                           gradW2.flatten(), gradb2.flatten()))
+    grad = np.concatenate((grad_W1.flatten(), grad_b1.flatten(),
+                           grad_W2.flatten(), grad_b2.flatten()))
 
     return cost, grad
 
