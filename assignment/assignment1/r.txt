@@ -1,0 +1,10 @@
+iter 39930: 9.496758
+iter 39940: 9.474044
+iter 39950: 9.435311
+iter 39960: 9.492463
+iter 39970: 9.520291
+iter 39980: 9.524589
+iter 39990: 9.550077
+iter 40000: 9.577164
+sanity check: cost at convergence should be around or below 10
+training took 5397 seconds
