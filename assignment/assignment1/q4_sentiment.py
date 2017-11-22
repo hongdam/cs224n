@@ -49,7 +49,10 @@ def getSentenceFeatures(tokens, wordVectors, sentence):
     sentVector = np.zeros((wordVectors.shape[1],))
 
     ### YOUR CODE HERE
-    raise NotImplementedError
+
+    w_indices = [tokens[w] for w in sentence]
+    sentVector = np.sum(wordVectors[w_indices], axis=0) / len(sentence)
+
     ### END YOUR CODE
 
     assert sentVector.shape == (wordVectors.shape[1],)
@@ -87,7 +90,10 @@ def chooseBestModel(results):
     bestResult = None
 
     ### YOUR CODE HERE
-    raise NotImplementedError
+
+    #best_index = results['dev'].index(max(results['dev']))
+    bestResult = max(results, key=lambda x: x["dev"])
+
     ### END YOUR CODE
 
     return bestResult
