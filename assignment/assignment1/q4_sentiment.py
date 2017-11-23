@@ -66,7 +66,10 @@ def getRegularizationValues():
     """
     values = None   # Assign a list of floats in the block below
     ### YOUR CODE HERE
-    raise NotImplementedError
+
+    values = [float(10 ** i) for i in range(-3, 2)]
+    values = [i * j for i in range(1, 10) for j in values]
+
     ### END YOUR CODE
     return sorted(values)
 
